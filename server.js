@@ -12,6 +12,7 @@ app.use(cors());
 const PORT = process.env.PORT || 3002;
 
 app.get('/representatives', getReps);
+app.get('/loadrep/:id', getOneRep);
 
 function getReps(request, response){
   let address = request.query.address;
@@ -49,9 +50,7 @@ function getReps(request, response){
             normalReps[attributes.firstlast].website = attributes.website;
             normalReps[attributes.firstlast].phone = attributes.phone
           
-            console.log(attributes.firstlast, normalReps[attributes.firstlast]);
           })
-          console.log(Object.keys(normalReps))
           response.send(repsArray)
         })
       
@@ -60,7 +59,9 @@ function getReps(request, response){
     })
 }
 
-
+function getOneRep(request, response){
+  console.log('getting into getOneRep', request.query.id);
+}
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
